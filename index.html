@@ -28,13 +28,14 @@
       margin-bottom: 1em;
     }
 
-    input[type="text"] {
+    input[type="text"], select {
       padding: 10px;
       font-size: 1.2em;
       border: none;
       border-radius: 5px;
       margin-bottom: 1em;
-      width: 80%;
+      margin-right: 10px;
+      width: 40%;
       max-width: 400px;
     }
 
@@ -53,7 +54,12 @@
   <h1>Baby Name Escrow</h1>
   <p>Enter your baby name:</p>
   <form id="nameForm">
-    <input type="text" id="nameInput" placeholder="Enter a name" required>
+    <input type="text" id="nameInput" placeholder="Enter a first name" required>
+    <select id="familySelect" required>
+      <option value="" disabled selected>Select last name</option>
+      <option value="Malkov">Malkov</option>
+      <option value="Shamath">Shamath</option>
+    </select>
     <br>
     <button type="button" onclick="submitName()">Submit</button>
   </form>
@@ -62,15 +68,9 @@
   <script>
     function submitName() {
       const name = document.getElementById("nameInput").value;
+      const familyName = document.getElementById("familySelect").value;
 
-      if (name) {
+      if (name && familyName) {
         // Display a simple confirmation message.
-        document.getElementById("responseMessage").innerText = `Thank you, ${name}, for submitting!`;
-        document.getElementById("nameInput").value = ""; // Clear the input box
-      } else {
-        alert("Please enter a name.");
-      }
-    }
-  </script>
-</body>
-</html>
+        document.getElementById("responseMessage").innerText = `Thank you, ${name} ${familyName}, for submitting!`;
+        document.getE
