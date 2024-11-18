@@ -1,0 +1,29 @@
+---
+layout: default
+title: Home
+---
+
+# Welcome to the Baby Name App
+
+Please enter a name below:
+
+<form id="nameForm">
+  <input type="text" id="nameInput" placeholder="Enter a name" required>
+  <button type="button" onclick="submitName()">Submit</button>
+</form>
+
+<p id="responseMessage"></p>
+
+<script>
+  function submitName() {
+    const name = document.getElementById("nameInput").value;
+
+    if (name) {
+      // You can modify this code later to connect to a backend
+      document.getElementById("responseMessage").innerText = `Thank you, ${name}, for submitting!`;
+      document.getElementById("nameInput").value = ""; // Clear the input box
+    } else {
+      alert("Please enter a name.");
+    }
+  }
+</script>
