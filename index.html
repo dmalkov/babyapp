@@ -1,29 +1,76 @@
 ---
 layout: default
-title: Home
+title: Baby Name Escrow
 ---
 
-# Welcome to the Baby Name App
-
-Please enter a name below:
-
-<form id="nameForm">
-  <input type="text" id="nameInput" placeholder="Enter a name" required>
-  <button type="button" onclick="submitName()">Submit</button>
-</form>
-
-<p id="responseMessage"></p>
-
-<script>
-  function submitName() {
-    const name = document.getElementById("nameInput").value;
-
-    if (name) {
-      // You can modify this code later to connect to a backend
-      document.getElementById("responseMessage").innerText = `Thank you, ${name}, for submitting!`;
-      document.getElementById("nameInput").value = ""; // Clear the input box
-    } else {
-      alert("Please enter a name.");
+<html>
+<head>
+  <style>
+    body {
+      background-color: #4c8c7d; /* Background color */
+      color: #fff; /* Text color */
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
     }
-  }
-</script>
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 0.5em;
+    }
+
+    p {
+      font-size: 1.5em;
+      margin-bottom: 1em;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 1em;
+      width: 80%;
+      max-width: 400px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1.2em;
+      border: none;
+      background-color: #ffca28; /* Button color */
+      color: #4c8c7d; /* Button text color */
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Baby Name Escrow</h1>
+  <p>Enter your baby name:</p>
+  <form id="nameForm">
+    <input type="text" id="nameInput" placeholder="Enter a name" required>
+    <br>
+    <button type="button" onclick="submitName()">Submit</button>
+  </form>
+  <p id="responseMessage"></p>
+
+  <script>
+    function submitName() {
+      const name = document.getElementById("nameInput").value;
+
+      if (name) {
+        // Display a simple confirmation message.
+        document.getElementById("responseMessage").innerText = `Thank you, ${name}, for submitting!`;
+        document.getElementById("nameInput").value = ""; // Clear the input box
+      } else {
+        alert("Please enter a name.");
+      }
+    }
+  </script>
+</body>
+</html>
