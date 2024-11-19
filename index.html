@@ -72,5 +72,13 @@
 
       if (name && familyName) {
         // Display a simple confirmation message.
-        document.getElementById("responseMessage").innerText = `Thanks for submitting!`;
-        document.getE
+        document.getElementById("responseMessage").innerText = `Thanks for submitting, ${familyName}!s`;
+        document.getElementById("nameInput").value = ""; // Clear input box
+        document.getElementById("familySelect").value = ""; // Clear dropdown
+      } else {
+        alert("Please enter both a first name and select a last name.");
+      }
+    }
+  </script>
+</body>
+</html>
