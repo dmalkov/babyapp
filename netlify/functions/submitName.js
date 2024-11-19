@@ -1,40 +1,42 @@
-const fs = require("fs");
-const path = require("path");
+<script>
+  async function submitName() {
+    const name = document.getElementById("nameInput").value;
+    const familyName = document.getElementById("familySelect").value;
 
-exports.handler = async function(event, context) {
-  if (event.httpMethod !== "POST") {
-    return {
-      statusCode: 405,
-      body: "Method Not Allowed",
-    };
+    if (name && familyName) {
+      // Define the API endpoint
+      const apiUrl = 'https://your-netlify-site.netlify.app/.netlify/functions/submitName';
+
+      // Prepare the data to be sent
+      const requestData = {
+        firstName: name,
+        familyName: familyName
+      };
+
+      // Send a POST request to the serverless function
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(requestData)
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          document.getElementById("responseMessage").innerText = `Thank you, ${name} ${familyName}, for submitting!`;
+          document.getElementById("nameInput").value = ""; // Clear the input box
+          document.getElementById("familySelect").value = ""; // Clear the dropdown
+        } else {
+          throw new Error('Failed to save the name.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('There was an error saving the name. Please try again.');
+      }
+    } else {
+      alert("Please enter a first name and select a last name.");
+    }
   }
-
-  // Parse the incoming data
-  const data = JSON.parse(event.body);
-  const { firstName, familyName } = data;
-
-  // Define the file path for saving names
-  const filePath = path.join(__dirname, `names.json`);
-
-  // Load the existing data if the file exists
-  let existingData = { Malkov: [], Shamath: [] };
-  if (fs.existsSync(filePath)) {
-    const fileData = fs.readFileSync(filePath, "utf8");
-    existingData = JSON.parse(fileData);
-  }
-
-  // Append the new name to the appropriate family list
-  if (familyName === "Malkov") {
-    existingData.Malkov.push(firstName);
-  } else if (familyName === "Shamath") {
-    existingData.Shamath.push(firstName);
-  }
-
-  // Write the updated data back to the file
-  fs.writeFileSync(filePath, JSON.stringify(existingData, null, 2));
-
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ message: "Name saved successfully!" }),
-  };
-};
+</script>
